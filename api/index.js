@@ -12,9 +12,9 @@ app.post("/proxy/webhook", async (req, res) => {
   console.log("Headers:", req.headers);
   console.log("Body:", req.body);
 
-  try {
-    const webhookUrl = process.env.WEBHOOK_URL;
+  const webhookUrl = process.env.WEBHOOK_URL;
 
+  try {
     const forwardRes = await axios.post(webhookUrl, req.body, {
       headers: {
         ...req.headers,
@@ -22,10 +22,13 @@ app.post("/proxy/webhook", async (req, res) => {
       },
     });
 
-    console.log("Response from webhook:", forwardRes.data);
+    console.log("Response from webhook (" + webhookUrl + "):", forwardRes.data);
     res.status(forwardRes.status).send(forwardRes.data);
   } catch (error) {
-    console.error("Error forwarding request:", error.message);
+    console.error(
+      "Error forwarding request (" + webhookUrl + "):",
+      error.message
+    );
 
     if (error.response) {
       res
