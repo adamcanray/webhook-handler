@@ -8,7 +8,7 @@ const port = 3000;
 
 app.use(bodyParser.json());
 
-app.post("/proxy/webhook", async (req, res) => {
+app.post("/hooks/payment/doku-payment_doku-payment", async (req, res) => {
   console.log("Headers:", req.headers);
   console.log("Body:", req.body);
 
