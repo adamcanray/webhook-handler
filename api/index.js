@@ -15,10 +15,10 @@ app.post("/proxy/webhook", async (req, res) => {
   const webhookUrl = process.env.WEBHOOK_URL;
 
   try {
-    const signature = headers["Signature"];
-    const clientId = headers["Client-Id"];
-    const requestId = headers["Request-Id"];
-    const requestTimestamp = headers["Request-Timestamp"];
+    const signature = req.headers["Signature"];
+    const clientId = req.headers["Client-Id"];
+    const requestId = req.headers["Request-Id"];
+    const requestTimestamp = req.headers["Request-Timestamp"];
 
     console.log("Signature:", signature);
     console.log("Client-Id:", clientId);
