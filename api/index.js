@@ -15,15 +15,15 @@ app.post("/proxy/webhook", async (req, res) => {
   const webhookUrl = process.env.WEBHOOK_URL;
 
   try {
-    const signature = req.headers["Signature"];
-    const clientId = req.headers["Client-Id"];
-    const requestId = req.headers["Request-Id"];
-    const requestTimestamp = req.headers["Request-Timestamp"];
+    const signature = req.headers["signature"];
+    const clientId = req.headers["slient-Id"];
+    const requestId = req.headers["request-id"];
+    const requestTimestamp = req.headers["request-timestamp"];
 
-    console.log("Signature:", signature);
-    console.log("Client-Id:", clientId);
-    console.log("Request-Id:", requestId);
-    console.log("Request-Timestamp:", requestTimestamp);
+    console.log("signature:", signature);
+    console.log("client-id:", clientId);
+    console.log("request-id:", requestId);
+    console.log("request-timestamp:", requestTimestamp);
     if (!signature || !clientId || !requestId || !requestTimestamp) {
       return res.status(400).send({ error: "Missing required headers" });
     }
@@ -31,10 +31,10 @@ app.post("/proxy/webhook", async (req, res) => {
     const forwardRes = await axios.post(webhookUrl, req.body, {
       headers: {
         // ...req.headers,
-        Signature: signature,
-        "Client-Id": clientId,
-        "Request-Id": requestId,
-        "Request-Timestamp": requestTimestamp,
+        signature: signature,
+        "client-id": clientId,
+        "request-id": requestId,
+        "request-timestamp": requestTimestamp,
         "Content-Type": "application/json",
       },
     });
