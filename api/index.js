@@ -16,7 +16,7 @@ app.post("/proxy/webhook", async (req, res) => {
 
   try {
     const signature = req.headers["signature"];
-    const clientId = req.headers["slient-Id"];
+    const clientId = req.headers["client-Id"];
     const requestId = req.headers["request-id"];
     const requestTimestamp = req.headers["request-timestamp"];
 
